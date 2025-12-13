@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 
 <body>
@@ -19,7 +20,13 @@
                 <?php
                     require_once('connexion.php');
                     $nolivre = $_GET['nolivre'];
-                    $stmt = $connexion->prepare("SELECT nom, prenom, isbn13, detail, photo FROM livre INNER JOIN auteur on livre.noauteur=auteur.noauteur WHERE :nolivre = nolivre");
+                    $stmt = $connexion->prepare(
+                        "SELECT titre, nom, prenom, isbn13, detail, photo, dateretour
+                        FROM livre
+                        INNER JOIN auteur on livre.noauteur=auteur.noauteur
+                        LEFT JOIN emprunter on livre.nolivre=emprunter.nolivre
+                        WHERE :nolivre = livre.nolivre"
+                    );
                     $stmt->bindParam(':nolivre', $nolivre);
                     $stmt->setFetchMode(PDO::FETCH_OBJ);
                     $stmt->execute();
@@ -28,7 +35,22 @@
                         echo 'auteur :', $enregistrement->nom, $enregistrement->prenom, '<br>';
                         echo 'ISBN :', $enregistrement->isbn13, '<br>';
                         echo $enregistrement->detail, '<br>';
-                        echo '<img src="http://localhost/Bibliodrive/covers/', $enregistrement->photo,'">';
+                        echo '<img class="photo-livre" src="http://localhost/Bibliodrive/covers/', $enregistrement->photo,'">';
+                        if ($enregistrement->dateretour != null) {
+                            echo '<br> Emprunté le : ', $enregistrement->dateretour;
+                        } else {
+                            $titre = $enregistrement->titre;
+                            echo '<br> Disponible';
+                            if (isset($_SESSION['identifiant'])) {
+                                echo '<form method="get" action="emprunter.php">
+                                        <input type="hidden" name="nolivre" value="', $titre,'">
+                                        <input type="submit" value="Emprunter" name="emprunter">
+                                    </form>';
+                            }
+                            else {
+                                echo '<br> Connectez-vous pour emprunter ce livre.';
+                            }
+                        }
                     }
                 ?>
             </div>

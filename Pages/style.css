@@ -1,0 +1,24 @@
+#myCarousel {
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+}
+
+.carousel-inner img {
+    width: 50%;
+    height: auto;
+    max-height: auto;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+.photo-livre {
+    width: 25%;
+    height: auto;
+}
+.erreur {
+    color: red;
+    font-weight: bold;
+}

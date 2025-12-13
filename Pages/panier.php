@@ -18,20 +18,15 @@
         <div class="row">
             <div class="col-sm-9">
                 <?php
-                    require_once('connexion.php');
-                    $recherche = $_GET['recherche'];
-                    $stmt = $connexion->prepare(
-                        "SELECT titre, anneeparution, nolivre
-                        FROM livre
-                        INNER JOIN auteur on livre.noauteur=auteur.noauteur
-                        WHERE auteur.nom = :nom"
-                    );
-                    $stmt->bindParam(':nom', $recherche);
-                    $stmt->setFetchMode(PDO::FETCH_OBJ);
-                    $stmt->execute();
-                    while($enregistrement = $stmt->fetch())
-                    {
-                            echo '<a href="detail.php?nolivre=' . $enregistrement->nolivre . '">' . $enregistrement->titre . ' (' . $enregistrement->anneeparution . ')</a><br>';
+                    require_once('connexion.php');// je veux afficher les titres des livres empruntés
+                    if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
+                        echo '<h3>Livres dans votre panier :</h3><ul>';
+                        foreach ($_SESSION['panier'] as $titre) {
+                            echo '<li>' . htmlspecialchars($titre) . '</li>';
+                        }
+                        echo '</ul>';
+                    } else {
+                        echo '<p>Votre panier est vide.</p>';
                     }
                 ?>
             </div>

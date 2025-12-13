@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 
 <body>
@@ -27,25 +28,6 @@
                         $carousel[] = $enregistrement->photo;
                     }
                 ?>
-                <style>
-                    #myCarousel {
-                        max-height: 800px;
-                        max-width: 500px;
-                        overflow: hidden;
-                    }
-
-                    #myCarousel .carousel-inner,
-                    #myCarousel .carousel-item {
-                    height: 800px;
-                    width: 500px;
-                    }
-
-                    #myCarousel .carousel-item img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-                </style>
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
