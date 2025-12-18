@@ -19,6 +19,12 @@
             <div class="col-sm-9">
                 <?php
                     require_once('connexion.php');
+                    if (isset($_GET['error']) && $_GET['error'] == 2) {
+                        echo '<p class="erreur">Vous avez déjà emprunté ce livre</p>';
+                    }
+                    if (isset($_GET['error']) && $_GET['error'] == 3) {
+                        echo '<p class="erreur">Vous avez déjà 5 livres dans votre panier</p>';
+                    }
                     $stmt = $connexion->prepare("SELECT photo FROM livre ORDER BY dateajout DESC LIMIT 3");
                     $stmt->setFetchMode(PDO::FETCH_OBJ);
                     $stmt->execute();

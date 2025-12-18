@@ -1,8 +1,8 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <body>
     <?php
-        session_start();
         require_once('connexion.php');
         if (isset($_POST['connexion'])) {
             $mel = $_POST['identifiant'];
@@ -10,7 +10,7 @@
             $stmt = $connexion->prepare(
                 "SELECT mel, motdepasse, adresse, profil
                 FROM utilisateur
-                WHERE mel = :mel AND motdepasse = :motdepasse"
+                WHERE mel = :mel AND motdepasse = :motdepasse"// Il faudra crypter le mot de passe plus tard
             );
             $stmt->bindParam(':mel', $mel);
             $stmt->bindParam(':motdepasse', $motdepasse);
@@ -21,6 +21,7 @@
                 $_SESSION['identifiant'] = $mel;
                 $_SESSION['adresse'] = $enregistrement->adresse;
                 $_SESSION['profil'] = $enregistrement->profil;
+                $_SESSION['panier'] = [];
                 header('Location: index.php');
             } else {
                 header('Location: index.php?error=1');

@@ -21,7 +21,7 @@
                     require_once('connexion.php');
                     $nolivre = $_GET['nolivre'];
                     $stmt = $connexion->prepare(
-                        "SELECT titre, nom, prenom, isbn13, detail, photo, dateretour
+                        "SELECT titre, livre.nolivre, nom, prenom, isbn13, detail, photo, dateretour
                         FROM livre
                         INNER JOIN auteur on livre.noauteur=auteur.noauteur
                         LEFT JOIN emprunter on livre.nolivre=emprunter.nolivre
@@ -40,10 +40,12 @@
                             echo '<br> Emprunté le : ', $enregistrement->dateretour;
                         } else {
                             $titre = $enregistrement->titre;
+                            $nolivre = $enregistrement->nolivre;
                             echo '<br> Disponible';
                             if (isset($_SESSION['identifiant'])) {
                                 echo '<form method="get" action="emprunter.php">
-                                        <input type="hidden" name="nolivre" value="', $titre,'">
+                                        <input type="hidden" name="titre" value="', $titre, '">
+                                        <input type="hidden" name="nolivre" value="', $nolivre, '">
                                         <input type="submit" value="Emprunter" name="emprunter">
                                     </form>';
                             }
