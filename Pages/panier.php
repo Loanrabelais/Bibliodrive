@@ -27,7 +27,7 @@
                             echo '<input type="button" name="annuler" value="Annuler" onclick="window.location.href=\'emprunter.php?nolivre=' . $nolivre . '&action=annuler\'">';
                             echo '</form>';
                         }
-                        echo '<input type="button" name="valider" value="Valider le panier" onclick="window.location.href=\valider_panier.php">';// Vide la table panier et rajoute les livres dans la table emprunter dans la base de données
+                        echo '<input type="button" name="valider" value="Valider le panier" onclick="window.location.href=\'valider_panier.php\'">';// Vide la table panier et rajoute les livres dans la table emprunter dans la base de données
                         echo '</ul>';
                     } else {
                         echo '<p>Votre panier est vide.</p>';

@@ -7,6 +7,7 @@
         require_once('connexion.php');
         foreach ($_SESSION['panier'] as $nolivre => $titre) {
             $mel = $_SESSION['identifiant'];
+            print("$mel, $nolivre, $titre<br>");
             $stmt = $connexion->prepare(
                 "INSERT INTO emprunter (mel, nolivre, dateemprunt)
                 VALUES (:mel, :nolivre, NOW())"

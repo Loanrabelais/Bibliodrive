@@ -21,11 +21,12 @@
                     require_once('connexion.php');
                     $nolivre = $_GET['nolivre'];
                     $stmt = $connexion->prepare(
-                        "SELECT titre, livre.nolivre, nom, prenom, isbn13, detail, photo, dateretour
+                        "SELECT titre, livre.nolivre, nom, prenom, isbn13, detail, photo, dateretour, dateemprunt
                         FROM livre
                         INNER JOIN auteur on livre.noauteur=auteur.noauteur
                         LEFT JOIN emprunter on livre.nolivre=emprunter.nolivre
-                        WHERE :nolivre = livre.nolivre"
+                        WHERE livre.nolivre = :nolivre
+                        ORDER BY dateemprunt DESC LIMIT 1"
                     );
                     $stmt->bindParam(':nolivre', $nolivre);
                     $stmt->setFetchMode(PDO::FETCH_OBJ);
@@ -36,8 +37,8 @@
                         echo 'ISBN :', $enregistrement->isbn13, '<br>';
                         echo $enregistrement->detail, '<br>';
                         echo '<img class="photo-livre" src="http://localhost/Bibliodrive/covers/', $enregistrement->photo,'">';
-                        if ($enregistrement->dateretour != null) {
-                            echo '<br> Emprunté le : ', $enregistrement->dateretour;
+                        if ($enregistrement->dateemprunt != null and $enregistrement->dateretour < $enregistrement->dateemprunt) {
+                            echo '<br> Emprunté le : ', $enregistrement->dateemprunt;
                         } else {
                             $titre = $enregistrement->titre;
                             $nolivre = $enregistrement->nolivre;
