@@ -10,14 +10,13 @@
             $stmt = $connexion->prepare(
                 "SELECT mel, motdepasse, adresse, profil
                 FROM utilisateur
-                WHERE mel = :mel AND motdepasse = :motdepasse"// Il faudra crypter le mot de passe plus tard
+                WHERE mel = :mel"
             );
             $stmt->bindParam(':mel', $mel);
-            $stmt->bindParam(':motdepasse', $motdepasse);
             $stmt->setFetchMode(PDO::FETCH_OBJ);
             $stmt->execute();
             $enregistrement = $stmt->fetch();
-            if ($enregistrement) {
+            if ($enregistrement && password_verify($motdepasse, $enregistrement->motdepasse)) {
                 $_SESSION['identifiant'] = $mel;
                 $_SESSION['adresse'] = $enregistrement->adresse;
                 $_SESSION['profil'] = $enregistrement->profil;
