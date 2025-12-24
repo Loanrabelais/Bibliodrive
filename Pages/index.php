@@ -10,26 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css"/>
-     <script src="../js/tarteaucitron/tarteaucitron.js"></script>
-        <script>
-
-    tarteaucitron.init({
-      "privacyUrl": "", /* URL de la page de la politique de vie privée */
-      "hashtag": "#tarteaucitron", /* Ouvrir le panneau contenant ce hashtag */
-      "cookieName": "tarteaucitron", /* Nom du Cookie */
-      "orientation": "middle", /* Position de la bannière (top - bottom) */
-      "showAlertSmall": true, /* Voir la bannière réduite en bas à droite */
-      "cookieslist": true, /* Voir la liste des cookies */
-      "adblocker": false, /* Voir une alerte si un bloqueur de publicités est détecté */
-      "AcceptAllCta": true, /* Voir le bouton accepter tout (quand highPrivacy est à true) */
-      "highPrivacy": true, /* Désactiver le consentement automatique : OBLIGATOIRE DANS l'UE */
-      "handleBrowserDNTRequest": false, /* Si la protection du suivi du navigateur est activée, tout interdire */
-      "removeCredit": false, /* Retirer le lien vers tarteaucitron.js */
-      "moreInfoLink": true, /* Afficher le lien "voir plus d'infos" */
-      "useExternalCss": false, /* Si false, tarteaucitron.css sera chargé */
-      "readmoreLink": "/cookiespolicy" /* Lien vers la page "Lire plus" A FAIRE OU PAS  */
-    });
-  </script>
 </head>
 
 <body>
@@ -54,6 +34,7 @@
                         $carousel[] = $enregistrement->photo;
                     }
                 ?>
+                <div class="youtube_player" videoID="Gjrrgv4-S9k" width="560" height="315" theme="light" rel="0" controls="1" showinfo="1" autoplay="0"></div>
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
