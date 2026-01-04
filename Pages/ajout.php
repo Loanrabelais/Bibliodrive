@@ -95,36 +95,43 @@
                                 $addresse = ($_POST['addresse'] ?? '');
                                 $ville = ($_POST['ville'] ?? '');
                                 $postal = ($_POST['postal'] ?? '');
-                                if ($_POST['mel'] !== '' &&
-                                    $_POST['mdp'] !== '' &&
-                                    $_POST['nom'] !== '' &&
-                                    $_POST['prenom'] !== '' &&
-                                    $_POST['addresse'] !== '' &&
-                                    $_POST['ville'] !== ''&&
-                                    $_POST['postal'] !== '') {
-                                    $hash = password_hash($mdp, PASSWORD_ARGON2ID);
-                                    $stmt = $connexion->prepare(
-                                        "INSERT INTO utilisateur (mel, motdepasse, nom, prenom, adresse, ville, codepostal, profil)
-                                        VALUES (:mel, :hash, :nom, :prenom, :addresse, :ville, :postal, :profil)"
-                                    );
-                                    $stmt->bindParam(':mel', $mel);
-                                    $stmt->bindParam(':hash', $hash);
-                                    $stmt->bindParam(':nom', $nom);
-                                    $stmt->bindParam(':prenom', $prenom);
-                                    $stmt->bindParam(':addresse', $addresse);
-                                    $stmt->bindParam(':ville', $ville);
-                                    $stmt->bindParam(':postal', $postal);
-                                    $profil = 'client';
-                                    $stmt->bindParam(':profil', $profil);
-                                    $stmt->execute();
-                                    echo 'membre ajouté';
+                                $stmt = $connexion->prepare("SELECT mel FROM utilisateur WHERE mel = :mel LIMIT 1");
+                                $stmt->bindParam(':mel', $mel);
+                                $stmt->setFetchMode(PDO::FETCH_OBJ);
+                                $stmt->execute();
+                                $enregistrement = $stmt->fetch(PDO::FETCH_OBJ);
+                                if ($enregistrement && $mel == $enregistrement->mel) {
+                                    echo '<p class="erreur">Ce mel est déjà utilisé</p>';
+                                    exit;
                                 } else {
-                                    echo '<p class="erreur">Veuillez remplir tous les champs.</p>';
+                                    if ($_POST['mel'] !== '' &&
+                                        $_POST['mdp'] !== '' &&
+                                        $_POST['nom'] !== '' &&
+                                        $_POST['prenom'] !== '' &&
+                                        $_POST['addresse'] !== '' &&
+                                        $_POST['ville'] !== ''&&
+                                        $_POST['postal'] !== '') {
+                                        $hash = password_hash($mdp, PASSWORD_ARGON2ID);
+                                        $stmt = $connexion->prepare(
+                                            "INSERT INTO utilisateur (mel, motdepasse, nom, prenom, adresse, ville, codepostal, profil)
+                                            VALUES (:mel, :hash, :nom, :prenom, :addresse, :ville, :postal, :profil)"
+                                        );
+                                        $stmt->bindParam(':mel', $mel);
+                                        $stmt->bindParam(':hash', $hash);
+                                        $stmt->bindParam(':nom', $nom);
+                                        $stmt->bindParam(':prenom', $prenom);
+                                        $stmt->bindParam(':addresse', $addresse);
+                                        $stmt->bindParam(':ville', $ville);
+                                        $stmt->bindParam(':postal', $postal);
+                                        $profil = 'client';
+                                        $stmt->bindParam(':profil', $profil);
+                                        $stmt->execute();
+                                        echo 'membre ajouté';
+                                    } else {
+                                        echo '<p class="erreur">Veuillez remplir tous les champs.</p>';
+                                    }
                                 }
                             }
-                        }
-                        else {
-                            echo '<p class="erreur">Action selectionnée incorrecte</p>';
                         }
                     }
                     else{

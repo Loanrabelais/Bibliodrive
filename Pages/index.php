@@ -34,7 +34,6 @@
                         $carousel[] = $enregistrement->photo;
                     }
                 ?>
-                <div class="youtube_player" videoID="Gjrrgv4-S9k" width="560" height="315" theme="light" rel="0" controls="1" showinfo="1" autoplay="0"></div>
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
