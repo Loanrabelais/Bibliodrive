@@ -5,6 +5,7 @@
 <body>
     <?php
         require_once('connexion.php');
+        // rajoute les livre du panier dans la table emprunter puis vide le panier
         foreach ($_SESSION['panier'] as $nolivre => $titre) {
             $mel = $_SESSION['identifiant'];
             print("$mel, $nolivre, $titre<br>");

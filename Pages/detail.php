@@ -33,6 +33,7 @@
                     $stmt->execute();
                     $enregistrement = $stmt->fetch();
                     if ($enregistrement) {
+                        //affichage du livre
                         echo 'auteur :', $enregistrement->nom, $enregistrement->prenom, '<br>';
                         echo 'ISBN :', $enregistrement->isbn13, '<br>';
                         echo $enregistrement->detail, '<br>';
@@ -51,7 +52,7 @@
                                     </form>';
                             }
                             else {
-                                echo '<br> Connectez-vous pour emprunter ce livre.';
+                                echo '<br><p class = "text-danger"> Connectez-vous pour emprunter ce livre.</p>';
                             }
                         }
                     }

@@ -13,12 +13,14 @@
             echo '<input type="button" name="ajout" value="Ajouter un membre" onclick="window.location.href=\'ajout.php?action=membre\'">';
             echo '</form> <br>';
         }
+        //formulaire de deconnexion
         echo '<form method="POST" action="session.php">
                 <input type="submit" value="Deconnexion" name="deconnexion">
             </form>';
     }
     else
     {
+        //formulaire d'identification
 	    echo '<form method="POST" action="session.php">
                 Identifiant : <input type="text" name="identifiant"><br><br>
                 Mot de passe : <input type="password" name="motdepasse">

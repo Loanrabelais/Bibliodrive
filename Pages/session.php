@@ -17,6 +17,7 @@
             $stmt->execute();
             $enregistrement = $stmt->fetch();
             if ($enregistrement && password_verify($motdepasse, $enregistrement->motdepasse)) {
+                // initialisation de la session
                 $_SESSION['identifiant'] = $mel;
                 $_SESSION['adresse'] = $enregistrement->adresse;
                 $_SESSION['profil'] = $enregistrement->profil;
@@ -26,7 +27,7 @@
                 header('Location: index.php?error=1');
             }
         }
-        elseif (isset($_POST['deconnexion']))
+        elseif (isset($_POST['deconnexion'])) //deconexion
         {
             $_SESSION['identifiant'] = null;
             session_unset();

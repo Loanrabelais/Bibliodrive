@@ -20,6 +20,7 @@
                 <?php
                     if (isset($_SESSION['identifiant']) and ($_SESSION['profil'] == 'admin')){
                         require_once('connexion.php');
+                        // formulaire pour rajouter un livre ou un menbre selon le paramètre passé dans l'URL
                         if ($_GET['action'] == 'livre')
                         {
                             echo '<h2>Ajouter un livre</h2>';
@@ -74,6 +75,7 @@
                                 }
                             }
                         }
+                        // ajout de menbre
                         elseif ($_GET['action'] == 'membre')
                         {
                             echo '<h2>Ajouter un membre</h2>';

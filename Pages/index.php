@@ -1,4 +1,5 @@
 <?php session_start();?>
+<!-- Page d'acceuil -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,7 @@
             <div class="col-sm-9">
                 <?php
                     require_once('connexion.php');
+                    // Gestion des erreurs
                     if (isset($_GET['error']) && $_GET['error'] == 2) {
                         echo '<p class="erreur">Vous avez déjà emprunté ce livre</p>';
                     }
@@ -34,6 +36,7 @@
                         $carousel[] = $enregistrement->photo;
                     }
                 ?>
+                <!-- Affichage Carousel -->
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
